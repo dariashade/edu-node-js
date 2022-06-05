@@ -1,7 +1,16 @@
 #!/usr/bin/env node
 import { getArgs } from './helpers/args.js';
-import { printHelp } from './services/log.service.js';
+import { printHelp, printSuccess, printError } from './services/log.service.js';
 import { saveKeyValue } from './services/storage.service.js';
+
+const saveToken = async (token) => {
+	try {
+		await saveKeyValue('token', token);
+		printSuccess('Токен сохранен');
+	} catch (err) {
+		printError(err.message);
+	};	
+};
 
 const initCLI = () => {
 	const args = getArgs(process.argv);
@@ -11,11 +20,11 @@ const initCLI = () => {
 	}
 
 	if (args.s) {
-		saveKeyValue('city', args.s);
+		//saveKeyValue('city', args.s);
 	}
 
 	if (args.t) {
-		saveKeyValue('token', args.t);
+		return saveToken(args.t);		
 	}
 
 	// Вывести погоду
