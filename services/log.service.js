@@ -20,4 +20,14 @@ const printHelp = () => {
 	);
 };
 
-export { printError, printSuccess, printHelp };
+const printWeather = (data, icon) => {
+	console.log(
+		dedent`${chalk.bgBlueBright(' WEATHER ')} Погода в городе ${data.name}
+		${icon}  ${data.weather[0].description}
+		Температура: ${data.main.temp} (ощущается как ${data.main.feels_like})
+		Ветер: ${data.wind.speed}м/с
+		`
+	);	
+}
+
+export { printError, printSuccess, printHelp, printWeather };
